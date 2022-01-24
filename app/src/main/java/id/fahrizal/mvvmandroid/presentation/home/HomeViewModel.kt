@@ -1,4 +1,4 @@
-package id.fahrizal.mvvmandroid.ui.home
+package id.fahrizal.mvvmandroid.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

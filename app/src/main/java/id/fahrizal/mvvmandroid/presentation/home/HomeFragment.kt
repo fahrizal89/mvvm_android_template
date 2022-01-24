@@ -1,4 +1,4 @@
-package id.fahrizal.mvvmandroid.ui.home
+package id.fahrizal.mvvmandroid.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import id.fahrizal.mvvmandroid.R
 import id.fahrizal.mvvmandroid.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

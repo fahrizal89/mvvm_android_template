@@ -1,4 +1,4 @@
-package id.fahrizal.mvvmandroid
+package id.fahrizal.mvvmandroid.presentation
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import id.fahrizal.mvvmandroid.R
 import id.fahrizal.mvvmandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

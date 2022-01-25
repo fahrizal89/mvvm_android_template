@@ -2,6 +2,7 @@ package id.fahrizal.mvvmandroid
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 /**
  * @author Fahrizal Sentosa (fahrizal.sentosa@dana.id)
@@ -9,4 +10,11 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @HiltAndroidApp
 class App : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        initLogger()
+    }
+
+    private fun initLogger() = Timber.plant(Timber.DebugTree())
 }

@@ -1,6 +1,9 @@
 package id.fahrizal.mvvmandroid.domain.schedule.usecase
 
+import id.fahrizal.mvvmandroid.domain.base.UseCase
+import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.domain.schedule.repository.ScheduleRepository
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -9,9 +12,9 @@ import javax.inject.Inject
  */
 class GetPraySchedules @Inject constructor(
     private val scheduleRepository: ScheduleRepository
-) {
+) : UseCase<Single<List<PraySchedule>>> {
 
-    fun execute() {
-        scheduleRepository.getPraySchedule()
+    override fun execute(): Single<List<PraySchedule>> {
+        return scheduleRepository.getPraySchedule()
     }
 }

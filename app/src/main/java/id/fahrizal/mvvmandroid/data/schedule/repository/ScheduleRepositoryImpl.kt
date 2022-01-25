@@ -1,6 +1,8 @@
 package id.fahrizal.mvvmandroid.data.schedule.repository
 
+import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.domain.schedule.repository.ScheduleRepository
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -9,7 +11,7 @@ import javax.inject.Inject
  */
 class ScheduleRepositoryImpl @Inject constructor() : ScheduleRepository {
 
-    override fun getPraySchedule() {
-
+    override fun getPraySchedule(): Single<List<PraySchedule>> {
+        return Single.just(ArrayList())
     }
 }

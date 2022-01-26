@@ -15,6 +15,6 @@ class GetPraySchedules @Inject constructor(
 ) : UseCase<Single<List<PraySchedule>>> {
 
     override fun execute(): Single<List<PraySchedule>> {
-        return scheduleRepository.getPraySchedule()
+        return scheduleRepository.getPrayScheduleFromNetwork()
     }
 }

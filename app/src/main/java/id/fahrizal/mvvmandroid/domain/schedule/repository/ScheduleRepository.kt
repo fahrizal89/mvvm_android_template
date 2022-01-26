@@ -9,5 +9,6 @@ import io.reactivex.Single
  */
 interface ScheduleRepository {
 
-    fun getPraySchedule(): Single<List<PraySchedule>>
+    fun getPrayScheduleFromNetwork(): Single<List<PraySchedule>>
+    fun getPrayScheduleFromLocal(): Single<List<PraySchedule>>
 }

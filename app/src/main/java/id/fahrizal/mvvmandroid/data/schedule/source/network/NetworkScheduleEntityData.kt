@@ -1,6 +1,8 @@
 package id.fahrizal.mvvmandroid.data.schedule.source.network
 
 import id.fahrizal.mvvmandroid.data.schedule.source.ScheduleEntityData
+import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -9,7 +11,7 @@ import javax.inject.Inject
  */
 class NetworkScheduleEntityData @Inject constructor() : ScheduleEntityData {
 
-    override fun getPraySchedule() {
-
+    override fun getPraySchedule(): Single<List<PraySchedule>> {
+        return Single.just(ArrayList())
     }
 }

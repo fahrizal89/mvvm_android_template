@@ -34,6 +34,8 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        homeViewModel.getPraySchedule()
         return root
     }
 

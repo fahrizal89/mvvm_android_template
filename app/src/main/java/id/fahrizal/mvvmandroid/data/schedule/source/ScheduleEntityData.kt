@@ -1,5 +1,6 @@
 package id.fahrizal.mvvmandroid.data.schedule.source
 
+import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
 import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import io.reactivex.Single
 
@@ -9,5 +10,5 @@ import io.reactivex.Single
  */
 interface ScheduleEntityData {
 
-    fun getPraySchedule(): Single<List<PraySchedule>>
+    fun getPraySchedule(prayScheduleRequest: PrayScheduleRequest): Single<List<PraySchedule>>
 }

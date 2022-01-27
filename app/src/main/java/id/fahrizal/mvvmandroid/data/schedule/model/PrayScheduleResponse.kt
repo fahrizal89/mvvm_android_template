@@ -1,9 +1,5 @@
 package id.fahrizal.mvvmandroid.data.schedule.model
 
-/**
- * @author Fahrizal Sentosa (fahrizal.sentosa@dana.id)
- * @version ShalatScheduleResponseModel, v 0.1 27/11/21 00.42 by Fahrizal Sentosa
- */
 class PrayScheduleResponse(
     val code: Int? = null,
     val results: Results? = null,

@@ -1,4 +1,4 @@
-package id.fahrizal.mvvmandroid.util.rx
+package id.fahrizal.mvvmandroid.util
 
 /**
  * @author Fahrizal Sentosa (fahrizal.sentosa@dana.id)

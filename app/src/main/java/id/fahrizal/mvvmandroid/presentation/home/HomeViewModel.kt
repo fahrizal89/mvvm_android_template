@@ -17,9 +17,9 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getPraySchedule() {
-        val request = PrayScheduleRequest("jakarta", getTodayDate())
+        val requestParam = PrayScheduleRequest("jakarta", getTodayDate())
 
-        getPraySchedules.execute(request)
+        getPraySchedules.execute(requestParam)
             .observe(object : SimpleSingleObserver<List<PraySchedule>>() {
                 override fun onSuccessful(response: List<PraySchedule>) {
                     response.size

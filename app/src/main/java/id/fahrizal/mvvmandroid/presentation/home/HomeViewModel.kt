@@ -1,21 +1,23 @@
 package id.fahrizal.mvvmandroid.presentation.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import id.fahrizal.mvvmandroid.data.networking.CoroutineDispatcherProvider
 import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
 import id.fahrizal.mvvmandroid.domain.schedule.usecase.GetPraySchedules
 import id.fahrizal.mvvmandroid.util.TimeUtil
-import id.fahrizal.mvvmandroid.util.rx.ObservableExt.observe
-import id.fahrizal.mvvmandroid.util.rx.SimpleSingleObserver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getPraySchedules: GetPraySchedules
+    private val getPraySchedules: GetPraySchedules,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<PrayUiState>(PrayUiState.Empty)
@@ -24,16 +26,11 @@ class HomeViewModel @Inject constructor(
     fun getPraySchedule() {
         val requestParam = PrayScheduleRequest("jakarta", getTodayDate())
 
-        getPraySchedules.execute(requestParam)
-            .observe(object : SimpleSingleObserver<List<PraySchedule>>() {
-                override fun onSuccessful(response: List<PraySchedule>) {
-                    _uiState.value = PrayUiState.Loaded(response)
-                }
+        viewModelScope.launch(coroutineDispatcherProvider.IO()) {
+            val result = getPraySchedules.execute(requestParam)
 
-                override fun onError(message: String) {
-                    //no op
-                }
-            })
+            _uiState.value = PrayUiState.Loaded(result)
+        }
     }
 
     private fun getTodayDate() = TimeUtil.getDateFormatted(Date())

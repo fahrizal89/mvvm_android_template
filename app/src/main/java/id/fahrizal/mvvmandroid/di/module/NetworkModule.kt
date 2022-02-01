@@ -1,11 +1,11 @@
 package id.fahrizal.mvvmandroid.di.module
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.fahrizal.mvvmandroid.BuildConfig
+import id.fahrizal.mvvmandroid.data.networking.CoroutineDispatcherProvider
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -35,4 +35,7 @@ object NetworkModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
+
+    @Provides
+    fun provideCoroutineDispatcher() = CoroutineDispatcherProvider()
 }

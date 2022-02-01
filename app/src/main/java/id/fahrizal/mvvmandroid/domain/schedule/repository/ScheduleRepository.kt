@@ -2,11 +2,10 @@ package id.fahrizal.mvvmandroid.domain.schedule.repository
 
 import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
-import io.reactivex.Single
 
 interface ScheduleRepository {
 
-    fun getPrayScheduleFromNetwork(prayScheduleRequest: PrayScheduleRequest): Single<List<PraySchedule>>
+    suspend fun getPrayScheduleFromNetwork(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule>
 
-    fun getPrayScheduleFromLocal(prayScheduleRequest: PrayScheduleRequest): Single<List<PraySchedule>>
+    suspend fun getPrayScheduleFromLocal(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule>
 }

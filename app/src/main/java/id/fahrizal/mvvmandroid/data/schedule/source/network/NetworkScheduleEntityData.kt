@@ -2,10 +2,9 @@ package id.fahrizal.mvvmandroid.data.schedule.source.network
 
 import id.fahrizal.mvvmandroid.data.schedule.api.PrayApi
 import id.fahrizal.mvvmandroid.data.schedule.mapper.PrayScheduleResponseMapper.toPraySchedules
-import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
 import id.fahrizal.mvvmandroid.data.schedule.source.ScheduleEntityData
 import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
-import io.reactivex.Single
+import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
 import javax.inject.Inject
 
 /**
@@ -16,8 +15,8 @@ class NetworkScheduleEntityData @Inject constructor(
     private val prayApi: PrayApi
 ) : ScheduleEntityData {
 
-    override fun getPraySchedule(prayScheduleRequest: PrayScheduleRequest): Single<List<PraySchedule>> {
+    override suspend fun getPraySchedule(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
         return prayApi.getPraySchedule(prayScheduleRequest.city, prayScheduleRequest.date)
-            .map { it.toPraySchedules() }
+            .toPraySchedules()
     }
 }

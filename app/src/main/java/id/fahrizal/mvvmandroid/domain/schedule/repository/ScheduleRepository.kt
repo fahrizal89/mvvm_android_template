@@ -8,4 +8,6 @@ interface ScheduleRepository {
     suspend fun getPrayScheduleFromNetwork(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule>
 
     suspend fun getPrayScheduleFromLocal(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule>
+
+    suspend fun addPraySchedules(praySchedules: List<PraySchedule>)
 }

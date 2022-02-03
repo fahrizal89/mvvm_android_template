@@ -7,10 +7,6 @@ import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
 import javax.inject.Inject
 
-/**
- * @author Fahrizal Sentosa (fahrizal.sentosa@dana.id)
- * @version NetworkScheduleEntityData, v 0.1 27/01/22 00.28 by Fahrizal Sentosa
- */
 class NetworkScheduleEntityData @Inject constructor(
     private val prayApi: PrayApi
 ) : ScheduleEntityData {
@@ -18,5 +14,9 @@ class NetworkScheduleEntityData @Inject constructor(
     override suspend fun getPraySchedule(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
         return prayApi.getPraySchedule(prayScheduleRequest.city, prayScheduleRequest.date)
             .toPraySchedules()
+    }
+
+    override suspend fun addPraySchedules(praySchedules: List<PraySchedule>) {
+        //no op
     }
 }

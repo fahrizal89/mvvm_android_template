@@ -18,4 +18,8 @@ class ScheduleRepositoryImpl @Inject constructor(
     override suspend fun getPrayScheduleFromLocal(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
         return scheduleFactory.create(Source.LOCAL).getPraySchedule(prayScheduleRequest)
     }
+
+    override suspend fun addPraySchedules(praySchedules: List<PraySchedule>) {
+        scheduleFactory.create(Source.LOCAL).addPraySchedules(praySchedules)
+    }
 }

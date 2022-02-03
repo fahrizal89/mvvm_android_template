@@ -10,10 +10,11 @@ import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 object PrayEntityMapper {
 
     fun List<PrayEntity>.toPraySchedules(): List<PraySchedule> {
-        return ArrayList<PraySchedule>().apply {
-            forEach {
-                add(PraySchedule(it.city, it.name, it.time, it.id))
-            }
+        val praySchedules = ArrayList<PraySchedule>()
+        forEach {
+            praySchedules.add(PraySchedule(it.city, it.name, it.time, it.id))
         }
+
+        return praySchedules
     }
 }

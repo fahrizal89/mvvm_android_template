@@ -1,5 +1,6 @@
 package id.fahrizal.mvvmandroid.presentation.home
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -32,6 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 homeViewModel.uiState.collect {
                     when (it) {
                         is HomeViewModel.PrayUiState.Loaded -> onLoaded()
+                        is HomeViewModel.PrayUiState.Error -> showError(it.message)
                         else -> showLoading()
                     }
                 }
@@ -45,5 +47,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun showLoading() {
         Timber.d("showLoading")
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

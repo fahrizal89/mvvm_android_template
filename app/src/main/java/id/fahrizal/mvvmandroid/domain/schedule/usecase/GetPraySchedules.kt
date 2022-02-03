@@ -10,6 +10,6 @@ class GetPraySchedules @Inject constructor(
 ) {
 
     suspend fun execute(param: PrayScheduleRequest): List<PraySchedule> {
-        return scheduleRepository.getPrayScheduleFromNetwork(param)
+        return scheduleRepository.getPrayScheduleFromLocal(param)
     }
 }

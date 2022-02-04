@@ -4,10 +4,6 @@ import android.content.Context
 import id.fahrizal.mvvmandroid.R
 import retrofit2.HttpException
 
-/**
- * @author Fahrizal Sentosa (fahrizal.sentosa@dana.id)
- * @version ExceptionParser, v 0.1 03/02/22 05.59 by Fahrizal Sentosa
- */
 object ExceptionParser {
 
     fun getMessage(context: Context, exception: Exception): String {

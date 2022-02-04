@@ -7,10 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-/**
- * @author Fahrizal Sentosa (fahrizal.sentosa@dana.id)
- * @version BaseFragment, v 0.1 29/01/22 01.45 by Fahrizal Sentosa
- */
 abstract class BaseFragment<T> : Fragment() {
 
     private var viewBinding: ViewBinding? = null

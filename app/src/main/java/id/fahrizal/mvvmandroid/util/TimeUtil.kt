@@ -4,10 +4,6 @@ import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * @author Fahrizal Sentosa (fahrizal.sentosa@dana.id)
- * @version TimeUtil, v 0.1 30/11/21 14.52 by Fahrizal Sentosa
- */
 object TimeUtil {
 
     fun setTime(dateString: String, time: String): Long {

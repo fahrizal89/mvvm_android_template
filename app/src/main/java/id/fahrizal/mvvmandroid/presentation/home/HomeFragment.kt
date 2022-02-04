@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import id.fahrizal.mvvmandroid.databinding.FragmentHomeBinding
-import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.presentation.base.BaseFragment
 import id.fahrizal.mvvmandroid.presentation.home.adapter.PrayAdapter
 import kotlinx.coroutines.flow.collect
@@ -30,7 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun init(viewBinding: ViewBinding) {
         homeViewModel.getPraySchedule()
         initUi()
-        fetchPray()
+        fetchPraySchedules()
     }
 
     private fun initUi() {
@@ -41,14 +40,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun fetchPray() {
+    private fun fetchPraySchedules() {
         lifecycleScope.launch {
-            // repeatOnLifecycle launches the block in a new coroutine every time the
-            // lifecycle is in the STARTED state (or above) and cancels it when it's STOPPED.
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.uiState.collect {
                     when (it) {
-                        is HomeViewModel.PrayUiState.Loaded -> onLoaded(it.data)
+                        is HomeViewModel.PrayUiState.Loaded -> onLoaded(it.itemState)
                         is HomeViewModel.PrayUiState.Error -> showError(it.message)
                         else -> showLoading()
                     }
@@ -57,8 +54,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun onLoaded(praySchedules: List<PraySchedule>) {
-        prayAdapter.update(praySchedules)
+    private fun onLoaded(homeItemUiState: HomeItemUiState) {
+        homeItemUiState.run {
+            getViewBinding().cityTv.text = city
+            prayAdapter.update(schedules)
+        }
     }
 
     private fun showLoading() {

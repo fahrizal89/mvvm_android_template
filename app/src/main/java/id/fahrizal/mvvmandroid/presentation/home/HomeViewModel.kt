@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import id.fahrizal.mvvmandroid.data.networking.CoroutineDispatcherProvider
-import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
 import id.fahrizal.mvvmandroid.domain.schedule.usecase.GetPraySchedules
 import id.fahrizal.mvvmandroid.util.ExceptionParser
@@ -31,13 +30,14 @@ class HomeViewModel @Inject constructor(
 
     fun getPraySchedule() {
         _uiState.value = PrayUiState.Loading
+        val city = "Jakarta"
+        val requestParam = PrayScheduleRequest(city, getTodayDate())
 
-        val requestParam = PrayScheduleRequest("Jakarta", getTodayDate())
         viewModelScope.launch(coroutineDispatcherProvider.IO()) {
             try {
                 val result = getPraySchedules.execute(requestParam)
 
-                _uiState.value = PrayUiState.Loaded(result)
+                _uiState.value = PrayUiState.Loaded(HomeItemUiState(city, result))
             } catch (error: Exception) {
                 _uiState.value = PrayUiState.Error(ExceptionParser.getMessage(context, error))
             }
@@ -49,7 +49,7 @@ class HomeViewModel @Inject constructor(
     sealed class PrayUiState {
         object Empty : PrayUiState()
         object Loading : PrayUiState()
-        class Loaded(val data: List<PraySchedule>) : PrayUiState()
+        class Loaded(val itemState: HomeItemUiState) : PrayUiState()
         class Error(val message: String) : PrayUiState()
     }
 }

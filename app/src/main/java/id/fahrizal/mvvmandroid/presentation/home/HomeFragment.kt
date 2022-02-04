@@ -43,10 +43,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun fetchPraySchedules() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.uiState.collect {
-                    when (it) {
-                        is HomeViewModel.PrayUiState.Loaded -> onLoaded(it.itemState)
-                        is HomeViewModel.PrayUiState.Error -> showError(it.message)
+                homeViewModel.uiState.collect { state ->
+                    when (state) {
+                        is HomeViewModel.PrayUiState.Loaded -> onLoaded(state.itemState)
+                        is HomeViewModel.PrayUiState.Error -> showError(state.message)
                         else -> showLoading()
                     }
                 }

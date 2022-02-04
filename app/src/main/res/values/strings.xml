@@ -4,6 +4,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="pray_time">Pray Time</string>
+
     <string name="error_not_found">Error: Not Found</string>
     <string name="error_something_went_wrong">Something went wrong</string>
 </resources>

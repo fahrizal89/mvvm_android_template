@@ -6,9 +6,21 @@
     tools:context=".presentation.home.HomeFragment">
 
     <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/pray_time"/>
+
+    <TextView
         android:id="@+id/cityTv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="32sp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="10sp"
+        tools:text="Title"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/prayScheduleRv"

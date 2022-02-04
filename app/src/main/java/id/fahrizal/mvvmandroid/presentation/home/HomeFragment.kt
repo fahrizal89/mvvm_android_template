@@ -5,16 +5,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import id.fahrizal.mvvmandroid.databinding.FragmentHomeBinding
+import id.fahrizal.mvvmandroid.domain.schedule.model.PraySchedule
 import id.fahrizal.mvvmandroid.presentation.base.BaseFragment
+import id.fahrizal.mvvmandroid.presentation.home.adapter.PrayAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+
+    @Inject
+    lateinit var prayAdapter: PrayAdapter
 
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -22,7 +29,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun init(viewBinding: ViewBinding) {
         homeViewModel.getPraySchedule()
+        initUi()
         fetchPray()
+    }
+
+    private fun initUi() {
+        getViewBinding().prayScheduleRv.run {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = prayAdapter
+        }
     }
 
     private fun fetchPray() {
@@ -32,7 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.uiState.collect {
                     when (it) {
-                        is HomeViewModel.PrayUiState.Loaded -> onLoaded()
+                        is HomeViewModel.PrayUiState.Loaded -> onLoaded(it.data)
                         is HomeViewModel.PrayUiState.Error -> showError(it.message)
                         else -> showLoading()
                     }
@@ -41,8 +57,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun onLoaded() {
-        Timber.d("onLoaded")
+    private fun onLoaded(praySchedules: List<PraySchedule>) {
+        prayAdapter.update(praySchedules)
     }
 
     private fun showLoading() {

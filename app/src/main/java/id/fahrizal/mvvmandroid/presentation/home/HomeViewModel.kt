@@ -30,11 +30,11 @@ class HomeViewModel @Inject constructor(
 
     fun getPraySchedule() {
         _uiState.value = PrayUiState.Loading
-        val city = "Jakarta"
-        val requestParam = PrayScheduleRequest(city, getTodayDate())
 
         viewModelScope.launch(coroutineDispatcherProvider.IO()) {
             try {
+                val city = "Jakarta"
+                val requestParam = PrayScheduleRequest(city, getTodayDate())
                 val result = getPraySchedules.execute(requestParam)
 
                 _uiState.value = PrayUiState.Loaded(HomeItemUiState(city, result))

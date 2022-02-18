@@ -1,6 +1,7 @@
 package id.fahrizal.mvvmandroid.presentation.home
 
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -65,7 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         Timber.d("showLoading")
     }
 
-    private fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    private fun showError(@StringRes stringRes: Int) {
+        Toast.makeText(requireContext(), stringRes, Toast.LENGTH_SHORT).show()
     }
 }

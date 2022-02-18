@@ -1,25 +1,23 @@
 package id.fahrizal.mvvmandroid.util
 
-import android.content.Context
 import id.fahrizal.mvvmandroid.R
 import retrofit2.HttpException
 
 object ExceptionParser {
 
-    fun getMessage(context: Context, exception: Exception): String {
+    fun getMessage(exception: Exception): Int {
         return when (exception) {
-            is HttpException -> getHttpErrorMessage(context, exception)
-            else -> generalError(context)
+            is HttpException -> getHttpErrorMessage(exception)
+            else -> generalError()
         }
     }
 
-    private fun getHttpErrorMessage(context: Context, exception: HttpException): String {
+    private fun getHttpErrorMessage(exception: HttpException): Int {
         return when (exception.code()) {
-            404 -> context.getString(R.string.error_not_found)
-            else -> generalError(context)
+            404 -> R.string.error_not_found
+            else -> generalError()
         }
     }
 
-    private fun generalError(context: Context) =
-        context.getString(R.string.error_something_went_wrong)
+    private fun generalError() = R.string.error_something_went_wrong
 }

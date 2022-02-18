@@ -2,6 +2,7 @@ package id.fahrizal.mvvmandroid.presentation.home
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +40,7 @@ class HomeViewModel @Inject constructor(
 
                 _uiState.value = PrayUiState.Loaded(HomeItemUiState(city, result))
             } catch (error: Exception) {
-                _uiState.value = PrayUiState.Error(ExceptionParser.getMessage(context, error))
+                _uiState.value = PrayUiState.Error(ExceptionParser.getMessage(error))
             }
         }
     }
@@ -50,6 +51,6 @@ class HomeViewModel @Inject constructor(
         object Empty : PrayUiState()
         object Loading : PrayUiState()
         class Loaded(val itemState: HomeItemUiState) : PrayUiState()
-        class Error(val message: String) : PrayUiState()
+        class Error(@StringRes val message: Int) : PrayUiState()
     }
 }

@@ -1,12 +1,9 @@
 package id.fahrizal.mvvmandroid.presentation.home
 
-import android.annotation.SuppressLint
-import android.content.Context
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import id.fahrizal.mvvmandroid.data.networking.CoroutineDispatcherProvider
 import id.fahrizal.mvvmandroid.domain.schedule.model.PrayScheduleRequest
 import id.fahrizal.mvvmandroid.domain.schedule.usecase.GetPraySchedules
@@ -18,12 +15,10 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-@SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPraySchedules: GetPraySchedules,
-    private val coroutineDispatcherProvider: CoroutineDispatcherProvider,
-    @ApplicationContext private val context: Context
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<PrayUiState>(PrayUiState.Empty)

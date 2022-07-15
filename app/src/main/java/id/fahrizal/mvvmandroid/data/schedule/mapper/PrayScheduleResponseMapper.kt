@@ -8,22 +8,47 @@ object PrayScheduleResponseMapper {
 
     fun PrayScheduleResponse.toPraySchedules(): List<PraySchedule> {
         val praySchedules = ArrayList<PraySchedule>()
-        val city = results?.location?.city ?: ""
-        results?.datetime?.forEach {
-            val dayStr = it?.date?.gregorian ?: "2000-01-01"
+        val cityName = state ?: ""
+        val format = "yyyy-M-dd hh:mm a"
 
-            it?.times?.let { times ->
-                praySchedules
-                    .add(PraySchedule(city, "Fajr", TimeUtil.setTime(dayStr, times.Fajr)))
-                praySchedules
-                    .add(PraySchedule(city, "Dhuhr", TimeUtil.setTime(dayStr, times.Dhuhr)))
-                praySchedules
-                    .add(PraySchedule(city, "Asr", TimeUtil.setTime(dayStr, times.Asr)))
-                praySchedules
-                    .add(PraySchedule(city, "Maghrib", TimeUtil.setTime(dayStr, times.Maghrib)))
-                praySchedules
-                    .add(PraySchedule(city, "Isha", TimeUtil.setTime(dayStr, times.Isha)))
-            }
+        items?.get(0)?.let { dataItem ->
+            val dateStr = dataItem.date_for
+
+            praySchedules.add(
+                PraySchedule(
+                    cityName, "Fajr",
+                    TimeUtil.getTimestamp(format, dateStr.plus(" ").plus(dataItem.fajr))
+                )
+            )
+
+            praySchedules.add(
+                PraySchedule(
+                    cityName, "Dhuhr",
+                    TimeUtil.getTimestamp(format, dateStr.plus(" ").plus(dataItem.dhuhr))
+                )
+            )
+
+            praySchedules.add(
+                PraySchedule(
+                    cityName, "Asr",
+                    TimeUtil.getTimestamp(format, dateStr.plus(" ").plus(dataItem.asr))
+                )
+            )
+
+            praySchedules.add(
+                PraySchedule(
+                    cityName, "Maghrib",
+                    TimeUtil.getTimestamp(format, dateStr.plus(" ").plus(dataItem.maghrib))
+                )
+            )
+
+            praySchedules.add(
+                PraySchedule(
+                    cityName, "Isha",
+                    TimeUtil.getTimestamp(format, dateStr.plus(" ").plus(dataItem.isha))
+                )
+            )
+
         }
 
         return praySchedules

@@ -12,7 +12,7 @@ class NetworkScheduleEntityData @Inject constructor(
 ) : ScheduleEntityData {
 
     override suspend fun getPraySchedule(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
-        return prayApi.getPraySchedule(prayScheduleRequest.city, prayScheduleRequest.date)
+        return prayApi.getPraySchedule(prayScheduleRequest.city)
             .toPraySchedules()
     }
 

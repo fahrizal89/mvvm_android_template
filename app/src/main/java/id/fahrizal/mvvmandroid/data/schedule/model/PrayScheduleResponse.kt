@@ -1,57 +1,43 @@
 package id.fahrizal.mvvmandroid.data.schedule.model
 
 class PrayScheduleResponse(
-    val code: Int? = null,
-    val results: Results? = null,
-    val status: String? = null
-) {
+    val country: String? = null,
+    val statusDescription: String? = null,
+    val address: String? = null,
+    val statusCode: Int? = null,
+    val method: Int? = null,
+    val prayerMethodName: String? = null,
+    val city: String? = null,
+    val timezone: String? = null,
+    val query: String? = null,
+    val latitude: String? = null,
+    val jsonMemberFor: String? = null,
+    val link: String? = null,
+    val qiblaDirection: String? = null,
+    val title: String? = null,
+    val statusValid: Int? = null,
+    val sealevel: String? = null,
+    val countryCode: String? = null,
+    val daylight: Int? = null,
+    val todayWeather: TodayWeather? = null,
+    val state: String? = null,
+    val postalCode: String? = null,
+    val items: List<ItemsItem?>? = null,
+    val mapImage: String? = null,
+    val longitude: String? = null
+)
 
-    class Location(
-        val elevation: Double? = null,
-        val country: String? = null,
-        val countryCode: String? = null,
-        val localOffset: Double? = null,
-        val city: String? = null,
-        val timezone: String? = null,
-        val latitude: Double? = null,
-        val longitude: Double? = null
-    )
+data class ItemsItem(
+    val asr: String? = null,
+    val isha: String? = null,
+    val shurooq: String? = null,
+    val date_for: String? = null,
+    val dhuhr: String? = null,
+    val fajr: String? = null,
+    val maghrib: String? = null
+)
 
-    class Date(
-        val hijri: String? = null,
-        val gregorian: String? = null,
-        val timestamp: Long = 0
-    )
-
-    class Results(
-        val settings: Settings? = null,
-        val datetime: List<DatetimeItem?>? = null,
-        val location: Location? = null
-    )
-
-    class Settings(
-        val school: String? = null,
-        val juristic: String? = null,
-        val timeformat: String? = null,
-        val highlat: String? = null,
-        val fajrAngle: Double? = null,
-        val ishaAngle: Double? = null
-    )
-
-    class Times(
-        val Sunset: String = "",
-        val Asr: String = "",
-        val Isha: String = "",
-        val Fajr: String = "",
-        val Dhuhr: String = "",
-        val Maghrib: String = "",
-        val Sunrise: String = "",
-        val Midnight: String = "",
-        val Imsak: String = ""
-    )
-
-    class DatetimeItem(
-        val date: Date? = null,
-        val times: Times? = null
-    )
-}
+data class TodayWeather(
+    val temperature: String? = null,
+    val pressure: String? = null
+)

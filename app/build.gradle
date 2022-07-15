@@ -20,12 +20,14 @@ android {
 
     buildTypes {
         debug{
-            buildConfigField("String", "BASE_PRAY_URL", "\"https://api.pray.zone\"")
+            buildConfigField("String", "BASE_PRAY_URL", "\"https://muslimsalat.com\"")
+            buildConfigField("String", "API_KEY", "\"9197411ee57d3c6d46e27afae2f23ecf\"")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_PRAY_URL", "\"https://api.pray.zone\"")
+            buildConfigField("String", "BASE_PRAY_URL", "\"https://muslimsalat.com\"")
+            buildConfigField("String", "API_KEY", "\"9197411ee57d3c6d46e27afae2f23ecf\"")
         }
     }
     compileOptions {

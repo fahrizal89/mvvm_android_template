@@ -11,9 +11,9 @@ class GetPraySchedules @Inject constructor(
 
     suspend fun execute(request: PrayScheduleRequest): List<PraySchedule> {
         return getPrayScheduleFromLocal(request).ifEmpty {
-            val praySchedulesMonthly = getPraySchedulesFromNetwork(request)
+            val praySchedules = getPraySchedulesFromNetwork(request)
 
-            scheduleRepository.addPraySchedules(praySchedulesMonthly)
+            scheduleRepository.addPraySchedules(praySchedules)
             getPrayScheduleFromLocal(request)
         }
     }

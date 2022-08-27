@@ -11,15 +11,11 @@ class ScheduleRepositoryImpl @Inject constructor(
     private val scheduleFactory: ScheduleFactory
 ) : ScheduleRepository {
 
-    override suspend fun getPrayScheduleFromNetwork(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
-        return scheduleFactory.create(Source.NETWORK).getPraySchedule(prayScheduleRequest)
-    }
-
-    override suspend fun getPrayScheduleFromLocal(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
+    override suspend fun getPraySchedules(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
         return scheduleFactory.create(Source.LOCAL).getPraySchedule(prayScheduleRequest)
-    }
-
-    override suspend fun addPraySchedules(praySchedules: List<PraySchedule>) {
-        scheduleFactory.create(Source.LOCAL).addPraySchedules(praySchedules)
+            .ifEmpty {
+                return scheduleFactory.create(Source.NETWORK).getPraySchedule(prayScheduleRequest)
+                    .also { scheduleFactory.create(Source.LOCAL)::addPraySchedules }
+            }
     }
 }

@@ -13,9 +13,13 @@ class ScheduleRepositoryImpl @Inject constructor(
 
     override suspend fun getPraySchedules(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
         return scheduleFactory.create(Source.LOCAL).getPraySchedule(prayScheduleRequest)
-            .ifEmpty {
-                return scheduleFactory.create(Source.NETWORK).getPraySchedule(prayScheduleRequest)
-                    .also { scheduleFactory.create(Source.LOCAL)::addPraySchedules }
+            .ifEmpty { syncPraySchedule(prayScheduleRequest) }
+    }
+
+    private suspend fun syncPraySchedule(prayScheduleRequest: PrayScheduleRequest): List<PraySchedule> {
+        return scheduleFactory.create(Source.NETWORK).getPraySchedule(prayScheduleRequest)
+            .also { prayScheduleFromNetwork ->
+                scheduleFactory.create(Source.LOCAL).addPraySchedules(prayScheduleFromNetwork)
             }
     }
 }

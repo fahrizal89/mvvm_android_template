@@ -48,7 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     when (state) {
                         is HomeViewModel.PrayUiState.Loaded -> onLoaded(state.itemState)
                         is HomeViewModel.PrayUiState.Error -> showError(state.message)
-                        else -> showLoading()
+                        is HomeViewModel.PrayUiState.Loading -> showLoading()
                     }
                 }
             }

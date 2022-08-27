@@ -21,7 +21,7 @@ class HomeViewModel @Inject constructor(
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<PrayUiState>(PrayUiState.Empty)
+    private val _uiState = MutableStateFlow<PrayUiState>(PrayUiState.Loading)
     val uiState: StateFlow<PrayUiState> = _uiState
 
     fun getPraySchedule() {
@@ -43,7 +43,6 @@ class HomeViewModel @Inject constructor(
     private fun getTodayDate() = TimeUtil.getDateFormatted(Date())
 
     sealed class PrayUiState {
-        object Empty : PrayUiState()
         object Loading : PrayUiState()
         class Loaded(val itemState: HomeItemUiState) : PrayUiState()
         class Error(@StringRes val message: Int) : PrayUiState()
